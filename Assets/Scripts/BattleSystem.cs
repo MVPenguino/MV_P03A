@@ -277,6 +277,13 @@ public class BattleSystem : MonoBehaviour
                 yield return playerHUD.SetExpSmooth();
 
                 // check level up
+                while (playerPokemon.pokemon.CheckForLevelUp())
+                {
+                    playerHUD.SetLevel();
+                    yield return dialogue.TypeDialogue($"{playerPokemon.pokemon.baseStats.Name} is now Level {playerPokemon.pokemon.level}!");
+
+                    yield return playerHUD.SetExpSmooth(true);
+                }
 
                 yield return new WaitForSeconds(2f);
                 OnBattleOver(true);

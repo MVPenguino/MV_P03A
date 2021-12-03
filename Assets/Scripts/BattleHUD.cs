@@ -18,9 +18,14 @@ public class BattleHUD : MonoBehaviour
         _pokemon = pokemon;
 
         nameText.text = pokemon.baseStats.Name;
-        levelText.text = "" + pokemon.level;
+        SetLevel();
         healthBar.SetHealth((float) pokemon.currentHealth / pokemon.MaxHealth);
         SetExp();
+    }
+
+    public void SetLevel()
+    {
+        levelText.text = "" + _pokemon.level;
     }
 
     public void SetExp()
@@ -31,9 +36,14 @@ public class BattleHUD : MonoBehaviour
         expBar.transform.localScale = new Vector3(normalizedExp, 1, 1);
     }
 
-    public IEnumerator SetExpSmooth()
+    public IEnumerator SetExpSmooth(bool reset = false)
     {
         if (expBar == null) yield break;
+
+        if (reset)
+        {
+            expBar.transform.localScale = new Vector3(0, 1, 1);
+        }
 
         float normalizedExp = GetNormalizedExp();
         yield return expBar.transform.DOScaleX(normalizedExp, 1.5f).WaitForCompletion();
