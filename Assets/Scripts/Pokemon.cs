@@ -78,12 +78,8 @@ public class Pokemon
 
     public void ApplyBoosts(List<StatBoost> statBoosts)
     {
-        Debug.Log("called");
-
         foreach (var statBoost in statBoosts)
         {
-            Debug.Log("called");
-
             var stat = statBoost.stat;
             var boost = statBoost.boost;
 

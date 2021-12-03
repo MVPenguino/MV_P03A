@@ -20,7 +20,7 @@ MonoBehaviour:
   pp: 30
   category: 2
   effects:
-    boost:
+    boosts:
     - stat: 1
       boost: -1
   target: 0
