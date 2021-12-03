@@ -48,6 +48,18 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] AudioClip superEffectiveHitSFX = null;
     [SerializeField] AudioClip pokemonFaintSFX = null;
 
+    [Header("MoveSFX")]
+    [SerializeField] AudioClip growlSFX = null;
+    [SerializeField] AudioClip tackleSFX = null;
+    [SerializeField] AudioClip vineWhipSFX = null;
+    [SerializeField] AudioClip growthSFX = null;
+    [SerializeField] AudioClip scratchSFX = null;
+    [SerializeField] AudioClip emberSFX = null;
+    [SerializeField] AudioClip thunderShockSFX = null;
+    [SerializeField] AudioClip tailWhipSFX = null;
+    [SerializeField] AudioClip waterGunSFX = null;
+    [SerializeField] AudioClip withdrawSFX = null;
+
     public event Action<bool> OnBattleOver;
 
     BattleState state;
@@ -136,6 +148,8 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerBag()
     {
+        yield return dialogue.TypeDialogue("Your bag is empty!");
+
         yield return new WaitForSeconds(1f);
     }
 
@@ -159,6 +173,47 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(1f);
             yield return dialogue.TypeDialogue($"{playerPokemon.pokemon.baseStats.Name} used {move.Base.Name}!");
 
+            if (move.Base.Name == "Growl")
+            {
+                AudioSource.PlayClipAtPoint(growlSFX, transform.position);
+            }
+            if (move.Base.Name == "Tackle")
+            {
+                AudioSource.PlayClipAtPoint(tackleSFX, transform.position);
+            }
+            if (move.Base.Name == "Vine Whip")
+            {
+                AudioSource.PlayClipAtPoint(vineWhipSFX, transform.position);
+            }
+            if (move.Base.Name == "Growth")
+            {
+                AudioSource.PlayClipAtPoint(growthSFX, transform.position);
+            }
+            if (move.Base.Name == "Scratch")
+            {
+                AudioSource.PlayClipAtPoint(scratchSFX, transform.position);
+            }
+            if (move.Base.Name == "Ember")
+            {
+                AudioSource.PlayClipAtPoint(emberSFX, transform.position);
+            }
+            if (move.Base.Name == "Thunder Shock")
+            {
+                AudioSource.PlayClipAtPoint(thunderShockSFX, transform.position);
+            }
+            if (move.Base.Name == "Tail Whip")
+            {
+                AudioSource.PlayClipAtPoint(tailWhipSFX, transform.position);
+            }
+            if (move.Base.Name == "Water Gun")
+            {
+                AudioSource.PlayClipAtPoint(waterGunSFX, transform.position);
+            }
+            if (move.Base.Name == "Withdraw")
+            {
+                AudioSource.PlayClipAtPoint(withdrawSFX, transform.position);
+            }
+
             playerPokemon.PlayAttackAnimation();
             yield return new WaitForSeconds(1f);
 
@@ -177,6 +232,9 @@ public class BattleSystem : MonoBehaviour
                     {
                         enemyPokemon.pokemon.ApplyBoosts(move.Base.Effects.Boosts);
                     }
+
+                    yield return ShowStatusChanges(playerPokemon.pokemon);
+                    yield return ShowStatusChanges(enemyPokemon.pokemon);
                 }
             }
 
@@ -209,6 +267,17 @@ public class BattleSystem : MonoBehaviour
                     ChangeToWinMusic(audioClipWinMusic);
                 }
 
+                // exp gain
+                int expYield = playerPokemon.pokemon.baseStats.ExpYield;
+                int enemyLevel = enemyPokemon.pokemon.level;
+
+                int expGain = Mathf.FloorToInt((expYield * enemyLevel) / 7);
+                playerPokemon.pokemon.Exp += expGain;
+                yield return dialogue.TypeDialogue($"{playerPokemon.pokemon.baseStats.Name} gained {expGain} exp.");
+                yield return playerHUD.SetExpSmooth();
+
+                // check level up
+
                 yield return new WaitForSeconds(2f);
                 OnBattleOver(true);
                 state = BattleState.Complete;
@@ -238,10 +307,70 @@ public class BattleSystem : MonoBehaviour
         move.PP--;
         yield return dialogue.TypeDialogue($"The wild {enemyPokemon.pokemon.baseStats.Name} used {move.Base.Name}!");
 
+        if (move.Base.Name == "Growl")
+        {
+            AudioSource.PlayClipAtPoint(growlSFX, transform.position);
+        }
+        if (move.Base.Name == "Tackle")
+        {
+            AudioSource.PlayClipAtPoint(tackleSFX, transform.position);
+        }
+        if (move.Base.Name == "Vine Whip")
+        {
+            AudioSource.PlayClipAtPoint(vineWhipSFX, transform.position);
+        }
+        if (move.Base.Name == "Growth")
+        {
+            AudioSource.PlayClipAtPoint(growthSFX, transform.position);
+        }
+        if (move.Base.Name == "Scratch")
+        {
+            AudioSource.PlayClipAtPoint(scratchSFX, transform.position);
+        }
+        if (move.Base.Name == "Ember")
+        {
+            AudioSource.PlayClipAtPoint(emberSFX, transform.position);
+        }
+        if (move.Base.Name == "Thunder Shock")
+        {
+            AudioSource.PlayClipAtPoint(thunderShockSFX, transform.position);
+        }
+        if (move.Base.Name == "Tail Whip")
+        {
+            AudioSource.PlayClipAtPoint(tailWhipSFX, transform.position);
+        }
+        if (move.Base.Name == "Water Gun")
+        {
+            AudioSource.PlayClipAtPoint(waterGunSFX, transform.position);
+        }
+        if (move.Base.Name == "Withdraw")
+        {
+            AudioSource.PlayClipAtPoint(withdrawSFX, transform.position);
+        }
+
         enemyPokemon.PlayAttackAnimation();
         yield return new WaitForSeconds(1f);
 
         playerPokemon.PlayHitAnimation();
+
+        if (move.Base.Category == MoveCategory.Status)
+        {
+            var effects = move.Base.Effects;
+            if (effects.Boosts != null)
+            {
+                if (move.Base.Target == MoveTarget.Self)
+                {
+                    enemyPokemon.pokemon.ApplyBoosts(move.Base.Effects.Boosts);
+                }
+                else
+                {
+                    playerPokemon.pokemon.ApplyBoosts(move.Base.Effects.Boosts);
+                }
+
+                yield return ShowStatusChanges(enemyPokemon.pokemon);
+                yield return ShowStatusChanges(playerPokemon.pokemon);
+            }
+        }
 
         var damageDetails = playerPokemon.pokemon.TakeDamage(move, enemyPokemon.pokemon);
         yield return playerHUD.UpdateHealth();
@@ -276,6 +405,15 @@ public class BattleSystem : MonoBehaviour
         else
         {
             ActionSelection();
+        }
+    }
+
+    IEnumerator ShowStatusChanges(Pokemon pokemon)
+    {
+        while (pokemon.StatusChanges.Count > 0)
+        {
+            var message = pokemon.StatusChanges.Dequeue();
+            yield return dialogue.TypeDialogue(message);
         }
     }
 

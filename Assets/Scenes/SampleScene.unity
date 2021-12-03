@@ -515,6 +515,7 @@ MonoBehaviour:
   nameText: {fileID: 667378155}
   levelText: {fileID: 288699748}
   healthBar: {fileID: 1812556224}
+  expBar: {fileID: 0}
 --- !u!1 &41490397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,6 +2253,7 @@ MonoBehaviour:
   nameText: {fileID: 526694385}
   levelText: {fileID: 614723117}
   healthBar: {fileID: 772187399}
+  expBar: {fileID: 1868599995}
 --- !u!114 &768045959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,7 +2379,7 @@ MonoBehaviour:
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 9830
+    ctime0: 13107
     ctime1: 32768
     ctime2: 65535
     ctime3: 0
@@ -3799,6 +3801,16 @@ MonoBehaviour:
   ineffectiveHitSFX: {fileID: 8300000, guid: 88894103edd5dcc49bc7ffed4bd8a2b8, type: 3}
   superEffectiveHitSFX: {fileID: 8300000, guid: b7a505f4da4122c42ba4e55eaf30e949, type: 3}
   pokemonFaintSFX: {fileID: 8300000, guid: f13c567abe980dd4d949815bcdbd1d88, type: 3}
+  growlSFX: {fileID: 8300000, guid: d20d5bbc12fd5e5489cf175f0494ebb4, type: 3}
+  tackleSFX: {fileID: 8300000, guid: abdb7921ded927c4ca05a26b0f125b5b, type: 3}
+  vineWhipSFX: {fileID: 8300000, guid: 1d4b437b969bff340b4546332c524f7b, type: 3}
+  growthSFX: {fileID: 8300000, guid: e69c1fd89922e4043a411fbb1d4273a4, type: 3}
+  scratchSFX: {fileID: 8300000, guid: 63ef99256cdefed4aa4bf982b545521a, type: 3}
+  emberSFX: {fileID: 8300000, guid: beee0c3e55a52004d9ea01a10ccc0c1a, type: 3}
+  thunderShockSFX: {fileID: 8300000, guid: ed98858745a016247a38075c263f6aff, type: 3}
+  tailWhipSFX: {fileID: 8300000, guid: 66bb7817e93a95546a7a6a04f909009e, type: 3}
+  waterGunSFX: {fileID: 8300000, guid: 709ddd881e8507c4ea68378ed9fa0301, type: 3}
+  withdrawSFX: {fileID: 8300000, guid: c53bfa1bc645106459c1e17cccc4ac49, type: 3}
 --- !u!4 &1550811841
 Transform:
   m_ObjectHideFlags: 0
@@ -4460,7 +4472,7 @@ MonoBehaviour:
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 9830
+    ctime0: 13107
     ctime1: 32768
     ctime2: 65535
     ctime3: 0
@@ -4589,9 +4601,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -106.25, y: 7.5}
+  m_AnchoredPosition: {x: -192.00002, y: 7.5}
   m_SizeDelta: {x: 171.5, y: 5.5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1868599997
 MonoBehaviour:
   m_ObjectHideFlags: 0

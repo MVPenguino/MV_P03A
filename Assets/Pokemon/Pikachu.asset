@@ -24,10 +24,15 @@ MonoBehaviour:
   spAttack: 50
   spDefense: 50
   speed: 90
+  expYield: 82
+  growthRate: 0
   learnableMoves:
   - moveBaseAttacks: {fileID: 11400000, guid: bb515eb6e6c86ac42bd18ff31afb8b58, type: 2}
     level: 1
+    moveSFX: {fileID: 8300000, guid: d20d5bbc12fd5e5489cf175f0494ebb4, type: 3}
   - moveBaseAttacks: {fileID: 11400000, guid: c7b7694b494756440ba50c74012f331e, type: 2}
     level: 1
+    moveSFX: {fileID: 8300000, guid: ed98858745a016247a38075c263f6aff, type: 3}
   - moveBaseAttacks: {fileID: 11400000, guid: a6a7d2e8d2ec5f44db729fe24e9e0e1f, type: 2}
     level: 6
+    moveSFX: {fileID: 8300000, guid: 66bb7817e93a95546a7a6a04f909009e, type: 3}
