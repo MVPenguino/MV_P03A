@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHUD enemyHUD;
     [SerializeField] HealthText playerHealthText;
     [SerializeField] Healthbar enemyHealthBar;
+    [SerializeField] Healthbar playerHealthBar;
     [SerializeField] Dialogue dialogue;
 
     [Header("GameObjects")]
@@ -99,6 +100,7 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetData(playerPokemon.pokemon);
         enemyHUD.SetData(enemyPokemon.pokemon);
         enemyHealthBar.ResetHealth();
+        playerHealthBar.ResetHealth();
         playerHealthText.SetHealthData(playerPokemon.pokemon);
 
         dialogue.SetMoveNames(playerPokemon.pokemon.Moves);

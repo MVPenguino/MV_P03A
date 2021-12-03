@@ -3782,6 +3782,7 @@ MonoBehaviour:
   enemyHUD: {fileID: 38790607}
   playerHealthText: {fileID: 768045959}
   enemyHealthBar: {fileID: 1812556224}
+  playerHealthBar: {fileID: 772187399}
   dialogue: {fileID: 352913092}
   playerOptions: {fileID: 1954686229}
   dialogueBox: {fileID: 352913088}
